@@ -35,8 +35,7 @@ import jade.content.schema.PredicateSchema;
 /**
  * Ontology containing concepts, predicates and actions used within the chat
  * application.
- * 
- * @author Giovanni Caire - TILAB
+ *
  */
 public class ChatOntology extends Ontology implements ChatVocabulary {
 
@@ -47,19 +46,7 @@ public class ChatOntology extends Ontology implements ChatVocabulary {
 	 * Constructor
 	 */
 	private ChatOntology() {
-		//#PJAVA_EXCLUDE_BEGIN
-		/*#J2ME_INCLUDE_BEGIN
-		//#PJAVA_EXCLUDE_END
-		super(ONTOLOGY_NAME, BasicOntology.getInstance(), null);
-
-		try {
-			add(new PredicateSchema(JOINED));
-			add(new PredicateSchema(LEFT));
-			add(new PredicateSchema(SPOKEN));
-		//#PJAVA_EXCLUDE_BEGIN
-		#J2ME_INCLUDE_END*/
-		//#PJAVA_EXCLUDE_END
-		//#J2ME_EXCLUDE_BEGIN
+		
 		super(ONTOLOGY_NAME, BasicOntology.getInstance(), new CFReflectiveIntrospector());
 
 		try {

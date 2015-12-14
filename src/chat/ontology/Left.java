@@ -5,12 +5,10 @@ import jade.core.AID;
 
 import java.util.List;
 
-//#J2ME_EXCLUDE_FILE
 
 /**
  * Left predicate used by chat ontology.
- * 
- * @author Michele Izzo - Telecomitalia
+ *
  */
 
 @SuppressWarnings("serial")

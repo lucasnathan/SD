@@ -54,7 +54,6 @@ import java.util.*;
 /**
    This agent maintains knowledge of agents currently attending the 
    chat and inform them when someone joins/leaves the chat.
-   @author Giovanni Caire - TILAB
  */
 public class ChatManagerAgent extends Agent implements SubscriptionManager {
 	private Map<AID, Subscription> participants = new HashMap<AID, Subscription>();

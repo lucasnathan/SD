@@ -26,7 +26,6 @@ package chat.ontology;
 
 /**
    Vocabulary containing symbols used within the chat application.
-   @author Giovanni Caire - TILAB
  */
 public interface ChatVocabulary {
 	// ONTOLOGY NAME

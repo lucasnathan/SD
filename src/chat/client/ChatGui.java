@@ -23,9 +23,7 @@ Boston, MA  02111-1307, USA.
 
 package chat.client;
 
-/**
-   @author Giovanni Caire - TILAB
- */
+
 public interface ChatGui {
 	void notifyParticipantsChanged(String[] names);
 	void notifySpoken(String speaker, String sentence);

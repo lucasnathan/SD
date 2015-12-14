@@ -23,7 +23,6 @@ Boston, MA  02111-1307, USA.
 
 package chat.client;
 
-//#MIDP_EXCLUDE_FILE
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,9 +30,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/**
-   @author Giovanni Caire - TILAB
- */
 class ParticipantsFrame extends Frame {
 	private AWTChatGui parent;
 	private TextArea participants;
