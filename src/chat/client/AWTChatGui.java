@@ -23,6 +23,7 @@ Boston, MA  02111-1307, USA.
 
 package chat.client;
 
+import chat.client.Start.NickNameDlg;
 import chat.client.agent.ChatClientAgent;
 
 import java.awt.*;
@@ -79,7 +80,9 @@ public class AWTChatGui extends Frame implements ChatGui {
 		
 		addWindowListener(new	WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
+                myAgent.handleSpoken(myAgent.getLocalName()+" Has left the Group");
 				myAgent.doDelete();
+                NickNameDlg dlg = new NickNameDlg("Chat");
 			}
 		} );
 		
@@ -88,6 +91,7 @@ public class AWTChatGui extends Frame implements ChatGui {
 	
 	public void notifyParticipantsChanged(String[] names) {
 		if (participantsFrame != null) {
+            myAgent.handleSpoken(names[names.length-1]+" Has joined the Group");
 			participantsFrame.refresh(names);
 		}
 	}

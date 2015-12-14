@@ -36,7 +36,7 @@ import java.awt.event.WindowEvent;
 /**
    Startup class for the chat application
  */
-//#MIDP_EXCLUDE_BEGIN
+
 public class Start extends MicroBoot {
   public static void main(String args[]) {
   	MicroBoot.main(args);
@@ -47,12 +47,10 @@ public class Start extends MicroBoot {
   	if (name == null || name.trim().equals("")) {
   		return false;
   	}
-  	// FIXME: should also check that name is composed
-  	// of letters and digits only
   	return true;
   }
   
-  private static class NickNameDlg extends Frame implements ActionListener {
+  public static class NickNameDlg extends Frame implements ActionListener {
   	private TextField nameTf;
   	private TextArea msgTa;
 
@@ -77,6 +75,7 @@ public class Start extends MicroBoot {
 			addWindowListener(new	WindowAdapter() {
 				public void windowClosing(WindowEvent e) {
 					MicroRuntime.stopJADE();
+                    System.exit(1);
 				}
 			} );
 
@@ -90,7 +89,7 @@ public class Start extends MicroBoot {
 	  	}
 	  	else {
 	  		try {
-	    		MicroRuntime.startAgent(name, "chat.client.agent.ChatClientAgent", null);
+                MicroRuntime.startAgent(name, "chat.client.agent.ChatClientAgent", null);
 	    		dispose();
     		}
     		catch (Exception ex) {
