@@ -45,11 +45,6 @@ import jade.util.leap.Iterator;
 import jade.util.leap.Set;
 import jade.util.leap.SortedSetImpl;
 
-/*#MIDP_INCLUDE_BEGIN
-import chat.client.MIDPChatGui;
-#MIDP_INCLUDE_END*/
-//#MIDP_EXCLUDE_BEGIN
-//#MIDP_EXCLUDE_END
 
 /**
  * This agent implements the logic of the chat client running on the user
@@ -90,14 +85,7 @@ public class ChatClientAgent extends Agent {
 		spokenMsg = new ACLMessage(ACLMessage.INFORM);
 		spokenMsg.setConversationId(CHAT_ID);
 
-		// Activate the GUI
-		//#MIDP_EXCLUDE_BEGIN
 		myGui = new AWTChatGui(this);
-		//#MIDP_EXCLUDE_END
-
-		/*#MIDP_INCLUDE_BEGIN
-		myGui = new MIDPChatGui(this);
-		#MIDP_INCLUDE_END*/
 	}
 
 	protected void takeDown() {
@@ -277,6 +265,5 @@ public class ChatClientAgent extends Agent {
 			notifySpoken(myAgent.getLocalName(), sentence);
 			send(spokenMsg);
 		}
-	} // END of inner class ChatSpeaker
-
+	}
 }
