@@ -1,5 +1,11 @@
 .gradle
 build/
+*/dist/
+*/build/
+
+#netbeans specific
+*/core
+*/nbproject/*
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -50,3 +56,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/SD-proj2/nbproject/private/
+/SD-proj2/dist/
