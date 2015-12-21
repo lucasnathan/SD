@@ -1,14 +1,14 @@
 V - Deve haver um local (agência/container) que gerencie uma lista de usuários conectados;
 
-V - O processo de conexão de um novo usuário, implica na instanciação de um agente estático no cliente. 
+X - O processo de conexão de um novo usuário, implica na instanciação de um agente estático no cliente. 
   Este agente deve clonar em um agente móvel e ir até o local de gerenciamento;
 
 V - O local de gerenciamento, a cada conexão ou desconexão, deve iniciar um agente móvel para avisar a todos
   os clientes sobre a lista atualizada de clientes conectados;
 
-V/X - O processo de desconexão deve aplicar a mesma lógica da conexão;
+X - O processo de desconexão deve aplicar a mesma lógica da conexão;
 
-V/X - O local de gerenciamento deve usar uma política de pooling com o intuito de detectar possíveis desconexões involuntárias,
+X - O local de gerenciamento deve usar uma política de pooling com o intuito de detectar possíveis desconexões involuntárias,
   caracterizando assim a política de tolerância à falhas;
 
 X - O envio de mensagem pode ser para todos, para um grupo, ou para um usuário em específico. 
