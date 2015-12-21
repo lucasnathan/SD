@@ -12,6 +12,11 @@ build.xml
 #netbeans specific
 */core
 */nbproject/*
+/core
+/nbproject/
+nbbuild.xml
+
+*~
 
 # Ignore Gradle GUI config
 gradle-app.setting
