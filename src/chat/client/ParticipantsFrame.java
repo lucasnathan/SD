@@ -29,12 +29,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 class ParticipantsFrame extends Frame {
 	private AWTChatGui parent;
-	private TextArea participants;
+	private JList participants;
 	private String me;
 	
+        DefaultListModel listModel;
+        
+    
 	ParticipantsFrame(AWTChatGui parent, String me) {
 		this.parent = parent;
 		this.me = me;
@@ -42,10 +47,14 @@ class ParticipantsFrame extends Frame {
 		setTitle("Participants: ");
 		setSize(parent.getSize());
 		
-		participants = new TextArea();
-		participants.setEditable(false);
-		participants.setBackground(Color.white);
-		participants.setText(me+"\n");
+                listModel = new DefaultListModel();
+ 
+		participants = new JList(listModel);
+		//participants.setEditable(false);
+		//participants.setBackground(Color.white);
+		//participants.setText(me+"\n");
+                
+                listModel.addElement(me);
 		add(participants, BorderLayout.CENTER);
 				
 		Button b = new Button("Close");
@@ -64,10 +73,14 @@ class ParticipantsFrame extends Frame {
 	}
 	
 	void refresh(String[] ss) {
-		participants.setText(me+"\n");
+            //participants.setText(me+"\n");
+            //participants.addElement(me);
+                listModel.clear();
+                
 		if (ss != null) {
 			for (int i = 0; i < ss.length; ++i) {
-				participants.append(ss[i]+"\n");
+				//participants.append(ss[i]+"\n");
+                                listModel.addElement(ss[i]);
 			}
 		}
 	}
