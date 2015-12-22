@@ -44,6 +44,7 @@ import jade.util.Logger;
 import jade.util.leap.Iterator;
 import jade.util.leap.Set;
 import jade.util.leap.SortedSetImpl;
+import java.util.ArrayList;
 
 /*#MIDP_INCLUDE_BEGIN
 import chat.client.MIDPChatGui;
@@ -107,7 +108,7 @@ public class ChatClientAgent extends Agent {
 	}
 
 	private void notifyParticipantsChanged() {
-		myGui.notifyParticipantsChanged(getParticipantNames());
+		myGui.notifyParticipantsChanged(getParticipants());
 	}
 
 	private void notifySpoken(String speaker, String sentence) {
@@ -123,13 +124,12 @@ public class ChatClientAgent extends Agent {
 		addBehaviour(new ChatSpeaker(this, s));
 	}
 
-	public String[] getParticipantNames() {
-		String[] pp = new String[participants.size()];
+	public ArrayList<ChatClientAgent> getParticipants() {
+		ArrayList<ChatClientAgent> pp = new ArrayList<>();
 		Iterator it = participants.iterator();
 		int i = 0;
 		while (it.hasNext()) {
-			AID id = (AID) it.next();
-			pp[i++] = id.getLocalName();
+                    pp.add((ChatClientAgent) it);
 		}
 		return pp;
 	}

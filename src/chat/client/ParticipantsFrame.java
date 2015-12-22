@@ -24,23 +24,45 @@ Boston, MA  02111-1307, USA.
 package chat.client;
 
 
+import chat.client.agent.ChatClientAgent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 class ParticipantsFrame extends Frame {
 	private AWTChatGui parent;
-	private JList participants;
-	private String me;
+	private JList<ChatClientAgent> participants;
+	private ChatClientAgent me;
 	
+        // Implementação do DefaultListCellRenderer para objeto ChatClientAgent
+        // Utilizado para criar uma lista de agentes em tela, assim é possivel
+        // a obtenção do Agente pela lista sem a necessidade de gambiarras.
+        public class AgentListCellRenderer extends DefaultListCellRenderer {
+            public Component getListCellRendererComponent(JList<?> list,
+                                     Object value,
+                                     int index,
+                                     boolean isSelected,
+                                     boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (value instanceof ChatClientAgent) {
+                ChatClientAgent agent = (ChatClientAgent)value;
+                setText(agent.getLocalName());
+            }
+            return this;
+            }
+        }
+        
+        
         DefaultListModel listModel;
         
     
-	ParticipantsFrame(AWTChatGui parent, String me) {
+	ParticipantsFrame(AWTChatGui parent, ChatClientAgent me) {
 		this.parent = parent;
 		this.me = me;
 		
@@ -48,13 +70,13 @@ class ParticipantsFrame extends Frame {
 		setSize(parent.getSize());
 		
                 listModel = new DefaultListModel();
- 
-		participants = new JList(listModel);
-		//participants.setEditable(false);
-		//participants.setBackground(Color.white);
-		//participants.setText(me+"\n");
+                listModel.addElement(me); 
                 
-                listModel.addElement(me);
+		participants = new JList<>(listModel);
+                participants.setCellRenderer(new AgentListCellRenderer());
+                
+                
+                
 		add(participants, BorderLayout.CENTER);
 				
 		Button b = new Button("Close");
@@ -72,16 +94,13 @@ class ParticipantsFrame extends Frame {
 		} );
 	}
 	
-	void refresh(String[] ss) {
-            //participants.setText(me+"\n");
-            //participants.addElement(me);
+	void refresh(ArrayList<ChatClientAgent> ss) {
                 listModel.clear();
-                
+                listModel.addElement(me);
 		if (ss != null) {
-			for (int i = 0; i < ss.length; ++i) {
-				//participants.append(ss[i]+"\n");
-                                listModel.addElement(ss[i]);
-			}
+                    for(ChatClientAgent ag:ss){
+                        listModel.addElement(ag);
+                    }
 		}
 	}
 	

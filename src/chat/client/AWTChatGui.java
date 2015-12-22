@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 
 public class AWTChatGui extends Frame implements ChatGui {
@@ -76,7 +77,7 @@ public class AWTChatGui extends Frame implements ChatGui {
 		} );
 		add(b, BorderLayout.SOUTH);
 		
-		participantsFrame = new ParticipantsFrame(this, myAgent.getLocalName());
+		participantsFrame = new ParticipantsFrame(this, myAgent);
 		
 		addWindowListener(new	WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -89,9 +90,9 @@ public class AWTChatGui extends Frame implements ChatGui {
 		setVisible(true);
 	}
 	
-	public void notifyParticipantsChanged(String[] names) {
+	public void notifyParticipantsChanged(ArrayList<ChatClientAgent> names) {
 		if (participantsFrame != null) {
-            myAgent.handleSpoken(names[names.length-1]+" Has joined the Group");
+//            myAgent.handleSpoken(names[names.length-1]+" Has joined the Group");
 			participantsFrame.refresh(names);
 		}
 	}

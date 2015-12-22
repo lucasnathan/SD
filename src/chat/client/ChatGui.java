@@ -23,9 +23,12 @@ Boston, MA  02111-1307, USA.
 
 package chat.client;
 
+import chat.client.agent.ChatClientAgent;
+import java.util.ArrayList;
+
 
 public interface ChatGui {
-	void notifyParticipantsChanged(String[] names);
+	void notifyParticipantsChanged(ArrayList<ChatClientAgent> names);
 	void notifySpoken(String speaker, String sentence);
 	void dispose();
 }
