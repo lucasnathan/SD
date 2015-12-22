@@ -26,6 +26,8 @@ import jade.core.MicroRuntime;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -65,6 +67,15 @@ public class Start extends MicroBoot {
             add(p, BorderLayout.NORTH);
 
             msgTa = new TextArea("Entre com um nickname\n");
+            nameTf.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    int key = e.getKeyCode();
+                    if (key == KeyEvent.VK_ENTER) {
+                        registerUser();
+                    }
+                }
+            });
             msgTa.setEditable(false);
             msgTa.setBackground(Color.white);
             add(msgTa, BorderLayout.CENTER);
@@ -78,8 +89,7 @@ public class Start extends MicroBoot {
 
             showCorrect();
         }
-
-        public void actionPerformed(ActionEvent e) {
+        private void registerUser(){
             String name = nameTf.getText();
             if (!checkName(name)) {
                 msgTa.append("Nickname Inválido\n");
@@ -91,6 +101,9 @@ public class Start extends MicroBoot {
                     msgTa.append("Nickname já está em uso\n");
                 }
             }
+        }
+        public void actionPerformed(ActionEvent e) {
+            registerUser();
         }
 
         private void showCorrect() {
