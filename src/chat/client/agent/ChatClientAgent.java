@@ -124,12 +124,13 @@ public class ChatClientAgent extends Agent {
 		addBehaviour(new ChatSpeaker(this, s));
 	}
 
-	public ArrayList<ChatClientAgent> getParticipants() {
-		ArrayList<ChatClientAgent> pp = new ArrayList<>();
+	public ArrayList<AID> getParticipants() {
+		ArrayList<AID> pp = new ArrayList<>();
 		Iterator it = participants.iterator();
 		int i = 0;
+                System.out.println(participants.size());
 		while (it.hasNext()) {
-                    pp.add((ChatClientAgent) it);
+                    pp.add((AID) it.next());
 		}
 		return pp;
 	}

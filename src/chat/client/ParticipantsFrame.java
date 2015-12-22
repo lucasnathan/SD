@@ -25,6 +25,7 @@ package chat.client;
 
 
 import chat.client.agent.ChatClientAgent;
+import jade.core.AID;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,6 +53,10 @@ class ParticipantsFrame extends Frame {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             if (value instanceof ChatClientAgent) {
                 ChatClientAgent agent = (ChatClientAgent)value;
+                setText(agent.getLocalName());
+            }
+            else if (value instanceof AID) {
+                AID agent = (AID)value;
                 setText(agent.getLocalName());
             }
             return this;
@@ -94,11 +99,11 @@ class ParticipantsFrame extends Frame {
 		} );
 	}
 	
-	void refresh(ArrayList<ChatClientAgent> ss) {
+	void refresh(ArrayList<AID> ss) {
                 listModel.clear();
                 listModel.addElement(me);
 		if (ss != null) {
-                    for(ChatClientAgent ag:ss){
+                    for(AID ag:ss){
                         listModel.addElement(ag);
                     }
 		}
