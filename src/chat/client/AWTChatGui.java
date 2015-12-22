@@ -44,7 +44,7 @@ public class AWTChatGui extends Frame implements ChatGui {
         myAgent = a;
 
         setTitle("Chat: " + myAgent.getLocalName());
-        setSize(getProperSize(256, 320));
+        setSize(getProperSize(500, 700));
         Panel p = new Panel();
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
@@ -59,7 +59,7 @@ public class AWTChatGui extends Frame implements ChatGui {
             }
         });
 
-        p.add(writeTf, BorderLayout.CENTER);
+
         Button b = new Button("Enviar");
 
         b.addActionListener(new ActionListener() {
@@ -67,8 +67,11 @@ public class AWTChatGui extends Frame implements ChatGui {
                 sendMessage();
             }
         });
+        
+        p.add(writeTf, BorderLayout.CENTER);
         p.add(b, BorderLayout.EAST);
-        add(p, BorderLayout.NORTH);
+        
+        add(p, BorderLayout.SOUTH);
 
         allTa = new TextArea();
         allTa.setEditable(false);
@@ -83,7 +86,7 @@ public class AWTChatGui extends Frame implements ChatGui {
                 }
             }
         });
-        add(b, BorderLayout.SOUTH);
+        add(b, BorderLayout.NORTH);
 
         participantsFrame = new ParticipantsFrame(this, myAgent);
 

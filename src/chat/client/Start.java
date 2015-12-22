@@ -56,12 +56,12 @@ public class Start extends MicroBoot {
         NickNameDlg(String s) {
             super(s);
 
-            setSize(getProperSize(256, 320));
+            setSize(getProperSize(600, 200));
             Panel p = new Panel();
             p.setLayout(new BorderLayout());
             nameTf = new TextField();
             p.add(nameTf, BorderLayout.CENTER);
-            Button b = new Button("OK");
+            Button b = new Button("Registrar");
             b.addActionListener(this);
             p.add(b, BorderLayout.EAST);
             add(p, BorderLayout.NORTH);
