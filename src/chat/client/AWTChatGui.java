@@ -30,6 +30,8 @@ import jade.core.AID;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -49,17 +51,18 @@ public class AWTChatGui extends Frame implements ChatGui {
 		Panel p = new Panel();
 		p.setLayout(new BorderLayout());
 		writeTf = new TextField();
+                
+                writeTf.addKeyListener(new KeyAdapterImpl());
+
+                
 		p.add(writeTf, BorderLayout.CENTER);
-		Button b = new Button("Send");
-		b.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-		  	String s = writeTf.getText();
-		  	if (s != null && !s.equals("")) {
-			  	myAgent.handleSpoken(s);
-			  	writeTf.setText("");
-		  	}
-			} 
-		} );
+		Button b = new Button("Enviar");
+		
+                b.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        sendMessage();
+                    } 
+                });
 		p.add(b, BorderLayout.EAST);
 		add(p, BorderLayout.NORTH);
 		
@@ -68,7 +71,7 @@ public class AWTChatGui extends Frame implements ChatGui {
 		allTa.setBackground(Color.white);
 		add(allTa, BorderLayout.CENTER);
 		
-		b = new Button("Participants");
+		b = new Button("Participantes");
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!participantsFrame.isVisible()) {
@@ -90,7 +93,13 @@ public class AWTChatGui extends Frame implements ChatGui {
 		
 		setVisible(true);
 	}
-	
+	public void sendMessage(){
+            String s = writeTf.getText();
+            if (s != null && !s.equals("")) {
+                myAgent.handleSpoken(s);
+                writeTf.setText("");
+            }
+        }
 	public void notifyParticipantsChanged(ArrayList<AID> names) {
 		if (participantsFrame != null) {
                     participantsFrame.refresh(names);
@@ -112,6 +121,20 @@ public class AWTChatGui extends Frame implements ChatGui {
 		participantsFrame.dispose();
 		super.dispose();
 	}
+
+    private static class KeyAdapterImpl extends KeyAdapter {
+
+        public KeyAdapterImpl() {
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_ENTER) {
+                
+            }
+        }
+    }
 }
 
 
