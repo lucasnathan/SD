@@ -80,10 +80,11 @@ public class ChatManagerAgent extends Agent implements SubscriptionManager {
         // Register to the AMS to detect when chat participants suddenly die
         myAMSSubscriber = new AMSSubscriber() {
             protected void installHandlers(Map handlersTable) {
-				// Fill the event handler table. We are only interested in the
+                // Fill the event handler table. We are only interested in the
                 // DEADAGENT event
 
                 // Aqui o manager cuida dos agentes que morrem inesperadamente.
+                // Eu acho.....
                 handlersTable.put(IntrospectionOntology.DEADAGENT, new EventHandler() {
                     public void handle(Event ev) {
                         DeadAgent da = (DeadAgent) ev;
@@ -143,7 +144,7 @@ public class ChatManagerAgent extends Agent implements SubscriptionManager {
                     // Notify old participant
                     Subscription oldS = (Subscription) participants.get(oldId);
                     oldS.notify(notif2);
-
+                    
                     who.add(oldId);
                 }
 
