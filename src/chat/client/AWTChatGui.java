@@ -52,7 +52,15 @@ public class AWTChatGui extends Frame implements ChatGui {
 		p.setLayout(new BorderLayout());
 		writeTf = new TextField();
                 
-                writeTf.addKeyListener(new KeyAdapterImpl());
+                writeTf.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        int key = e.getKeyCode();
+                        if (key == KeyEvent.VK_ENTER) {
+                            sendMessage();
+                        }
+                    }
+                });
 
                 
 		p.add(writeTf, BorderLayout.CENTER);
@@ -122,19 +130,6 @@ public class AWTChatGui extends Frame implements ChatGui {
 		super.dispose();
 	}
 
-    private static class KeyAdapterImpl extends KeyAdapter {
-
-        public KeyAdapterImpl() {
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_ENTER) {
-                
-            }
-        }
-    }
 }
 
 
