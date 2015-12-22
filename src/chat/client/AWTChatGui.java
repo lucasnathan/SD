@@ -81,7 +81,7 @@ public class AWTChatGui extends Frame implements ChatGui {
 		
 		addWindowListener(new	WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-                myAgent.handleSpoken(myAgent.getLocalName()+" Has left the Group");
+                myAgent.handleSpoken(myAgent.getLocalName()+" Saiu do grupo");
 				myAgent.doDelete();
                 NickNameDlg dlg = new NickNameDlg("Chat");
 			}

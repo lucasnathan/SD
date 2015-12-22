@@ -85,6 +85,8 @@ public class ChatManagerAgent extends Agent implements SubscriptionManager {
 			protected void installHandlers(Map handlersTable) {
 				// Fill the event handler table. We are only interested in the
 				// DEADAGENT event
+                            
+                                // Aqui o manager cuida dos agentes que morrem inesperadamente.
 				handlersTable.put(IntrospectionOntology.DEADAGENT, new EventHandler() {
 					public void handle(Event ev) {
 						DeadAgent da = (DeadAgent)ev;
