@@ -4,6 +4,8 @@ out/
 .idea/
 SD.iml
 build.xml
+META-INF/
+
 
 #ant specific
 */dist/
