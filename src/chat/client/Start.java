@@ -67,7 +67,7 @@ public class Start extends MicroBoot {
 			p.add(b, BorderLayout.EAST);
 			add(p, BorderLayout.NORTH);
 
-			msgTa = new TextArea("Enter nickname\n");
+			msgTa = new TextArea("Entre com um nickname\n");
 			msgTa.setEditable(false);
 			msgTa.setBackground(Color.white);
 			add(msgTa, BorderLayout.CENTER);
@@ -85,7 +85,7 @@ public class Start extends MicroBoot {
 		public void actionPerformed(ActionEvent e) {
 	  	String name = nameTf.getText();
 	  	if (!checkName(name)) {
-		  	msgTa.append("Invalid nickname\n");
+		  	msgTa.append("Nickname Inválido\n");
 	  	}
 	  	else {
 	  		try {
@@ -93,7 +93,7 @@ public class Start extends MicroBoot {
 	    		dispose();
     		}
     		catch (Exception ex) {
-    			msgTa.append("Nickname already in use\n");
+    			msgTa.append("Nickname já está em uso\n");
     		}
 	  	}
 		}
@@ -104,7 +104,7 @@ public class Start extends MicroBoot {
 			int centerX = screenSize.width / 2;
 			int centerY = screenSize.height / 2;
 			setLocation(centerX - frameSize.width / 2, centerY - frameSize.height / 2);
-			show();
+			setVisible(true);
 		}
 
 		private Dimension getProperSize(int maxX, int maxY) {

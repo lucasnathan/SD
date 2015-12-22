@@ -23,36 +23,44 @@ Boston, MA  02111-1307, USA.
 
 package chat.manager;
 
+//#J2ME_EXCLUDE_FILE
 
-import chat.ontology.ChatOntology;
-import chat.ontology.Joined;
-import jade.content.abs.AbsAggregate;
-import jade.content.abs.AbsPredicate;
-import jade.content.abs.AbsTerm;
-import jade.content.lang.Codec;
-import jade.content.lang.sl.SLCodec;
-import jade.content.onto.BasicOntology;
-import jade.content.onto.Ontology;
-import jade.core.AID;
 import jade.core.Agent;
-import jade.domain.FIPAAgentManagement.FailureException;
-import jade.domain.FIPAAgentManagement.NotUnderstoodException;
-import jade.domain.FIPAAgentManagement.RefuseException;
-import jade.domain.introspection.AMSSubscriber;
-import jade.domain.introspection.DeadAgent;
-import jade.domain.introspection.Event;
-import jade.domain.introspection.IntrospectionOntology;
+import jade.core.AID;
+
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.proto.SubscriptionResponder;
-import jade.proto.SubscriptionResponder.Subscription;
-import jade.proto.SubscriptionResponder.SubscriptionManager;
 
-import java.util.*;
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
+import jade.content.onto.BasicOntology;
+import jade.content.abs.*;
+
+import jade.proto.SubscriptionResponder;
+import jade.proto.SubscriptionResponder.SubscriptionManager;
+import jade.proto.SubscriptionResponder.Subscription;
+import jade.domain.FIPAAgentManagement.RefuseException;
+import jade.domain.FIPAAgentManagement.NotUnderstoodException;
+import jade.domain.FIPAAgentManagement.FailureException;
+
+import jade.domain.introspection.IntrospectionOntology;
+import jade.domain.introspection.Event;
+import jade.domain.introspection.DeadAgent;
+import jade.domain.introspection.AMSSubscriber;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import chat.ontology.*;
 
 /**
    This agent maintains knowledge of agents currently attending the 
    chat and inform them when someone joins/leaves the chat.
+   @author Giovanni Caire - TILAB
  */
 public class ChatManagerAgent extends Agent implements SubscriptionManager {
 	private Map<AID, Subscription> participants = new HashMap<AID, Subscription>();
@@ -85,7 +93,7 @@ public class ChatManagerAgent extends Agent implements SubscriptionManager {
 						// other participants that it has just left.
 						if (participants.containsKey(id)) {
 							try {
-								deregister(participants.get(id));
+								deregister((Subscription) participants.get(id));
 							}
 							catch (Exception e) {
 								//Should never happen
@@ -135,7 +143,7 @@ public class ChatManagerAgent extends Agent implements SubscriptionManager {
 					AID oldId = it.next();
 					
 					// Notify old participant
-					Subscription oldS = participants.get(oldId);
+					Subscription oldS = (Subscription) participants.get(oldId);
 					oldS.notify(notif2);
 					
 					who.add(oldId);

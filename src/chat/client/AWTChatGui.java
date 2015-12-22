@@ -86,7 +86,7 @@ public class AWTChatGui extends Frame implements ChatGui {
 			}
 		} );
 		
-		show();
+		setVisible(true);
 	}
 	
 	public void notifyParticipantsChanged(String[] names) {
