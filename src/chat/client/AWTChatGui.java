@@ -25,6 +25,7 @@ import chat.client.agent.ChatClientAgent;
 import jade.core.AID;
 import jade.core.Agent;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,12 +42,51 @@ public class AWTChatGui extends Frame implements ChatGui {
     private TextArea allTa;
     private ParticipantsFrame participantsFrame;
 
+    private AWTChatGui parent;
+    private JList<ChatClientAgent> participants;
+    DefaultListModel listModel;
+
+
+    // Implementação do DefaultListCellRenderer para objeto ChatClientAgent
+    // Utilizado para criar uma lista de agentes em tela, assim é possivel
+    // a obtenção do Agente pela lista sem a necessidade de gambiarras.
+    public class AgentListCellRenderer extends DefaultListCellRenderer {
+
+        public Component getListCellRendererComponent(JList<?> list,
+                                                      Object value,
+                                                      int index,
+                                                      boolean isSelected,
+                                                      boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            if (value instanceof ChatClientAgent) {
+                ChatClientAgent agent = (ChatClientAgent) value;
+                setText(agent.getLocalName());
+            } else if (value instanceof AID) {
+                AID agent = (AID) value;
+                setText(agent.getLocalName());
+            }
+            return this;
+        }
+    }
+
     public AWTChatGui(ChatClientAgent a) {
+
+        listModel = new DefaultListModel();
+        listModel.addElement(myAgent);
+
+        participants = new JList<>(listModel);
+        participants.setCellRenderer(new AgentListCellRenderer());
+        JScrollPane jScrollPane = new JScrollPane(participants);
+        jScrollPane.setViewportView(participants);
+        Panel frame = new Panel();
+
+
+
         myAgent = a;
 
-        
         setTitle("Chat: " + myAgent.getLocalName());
-        setSize(getProperSize(500, 700));
+        setSize(getProperSize(600,350));
+        jScrollPane.setSize(getProperSize(300,300));
         Panel p = new Panel();
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
@@ -55,10 +95,8 @@ public class AWTChatGui extends Frame implements ChatGui {
         allTa = new TextArea();
         allTa.setEditable(false);
         allTa.setBackground(Color.white);
-
+        allTa.setSize(getProperSize(300,300));
         Button b = new Button("Participantes");
-       
-        participantsFrame = new ParticipantsFrame(this, myAgent);
         
         // Implementações de Action Lisners
         
@@ -79,15 +117,7 @@ public class AWTChatGui extends Frame implements ChatGui {
                 sendMessage();
             }
         });
-        // Implementação do botão para ver Participantes do chat
-        b.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (!participantsFrame.isVisible()) {
-                    participantsFrame.setVisible(true);
-                }
-            }
-        });
-        
+
         // Implementação do WindowListner para enviar mensagem quando usuario
         // desconecta do servidor
         addWindowListener(new WindowAdapter() {
@@ -95,22 +125,36 @@ public class AWTChatGui extends Frame implements ChatGui {
                 myAgent.handleSpoken(myAgent.getLocalName() + " Saiu do grupo");
                 myAgent.doDelete();
                 NickNameDlg dlg = new NickNameDlg("Chat");
+                setVisible(false);
             }
         });
         
         
         //Adiciona elementos de interface
+
+        frame.add(allTa,BorderLayout.WEST);
+        frame.add(jScrollPane,BorderLayout.EAST);
         p.add(writeTf, BorderLayout.CENTER);
         p.add(b2, BorderLayout.EAST);
+        add(frame, BorderLayout.BEFORE_FIRST_LINE);
         add(p, BorderLayout.SOUTH);
-        add(allTa, BorderLayout.CENTER);
-        add(b, BorderLayout.NORTH);
-        setVisible(true);
-<<<<<<< HEAD
 
-=======
+
+
+
+        setVisible(true);
         sendMessage();
->>>>>>> 385754b2e976fe3b29e5d5abc970bd380e436d79
+
+    }
+
+    void refresh(ArrayList<AID> ss) {
+        listModel.clear();
+        listModel.addElement(myAgent);
+        if (ss != null) {
+            for (AID ag : ss) {
+                listModel.addElement(ag);
+            }
+        }
     }
 
     public void sendMessage() {
@@ -122,9 +166,8 @@ public class AWTChatGui extends Frame implements ChatGui {
     }
 
     public void notifyParticipantsChanged(ArrayList<AID> names) {
-        if (participantsFrame != null) {
-            participantsFrame.refresh(names);
-        }
+
+            this.refresh(names);
         //myAgent.handleSpoken(names.get(names.size()-1).getLocalName()+" Has joined the Group");
     }
 
