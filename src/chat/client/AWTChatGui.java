@@ -90,12 +90,13 @@ public class AWTChatGui extends Frame implements ChatGui {
         Panel p = new Panel();
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
-        writeTf.setText(myAgent.getLocalName()+"Entrou no grupo");
+
         Button b2 = new Button("Enviar");
         allTa = new TextArea();
+        allTa.setSize(getProperSize(300,300));
         allTa.setEditable(false);
         allTa.setBackground(Color.white);
-        allTa.setSize(getProperSize(300,300));
+
         Button b = new Button("Participantes");
         
         // Implementações de Action Lisners
@@ -138,9 +139,6 @@ public class AWTChatGui extends Frame implements ChatGui {
         p.add(b2, BorderLayout.EAST);
         add(frame, BorderLayout.BEFORE_FIRST_LINE);
         add(p, BorderLayout.SOUTH);
-
-
-
 
         setVisible(true);
         sendMessage();
