@@ -78,27 +78,26 @@ public class AWTChatGui extends Frame implements ChatGui {
         participants.setCellRenderer(new AgentListCellRenderer());
         JScrollPane jScrollPane = new JScrollPane(participants);
         jScrollPane.setViewportView(participants);
+        
+        participants.setFixedCellWidth(200);
+        
         Panel frame = new Panel();
-
-
-
+        frame.setLayout(new BorderLayout());
+        
         myAgent = a;
 
         setTitle("Chat: " + myAgent.getLocalName());
         setSize(getProperSize(600,350));
-        jScrollPane.setSize(getProperSize(300,300));
         Panel p = new Panel();
+        
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
 
         Button b2 = new Button("Enviar");
         allTa = new TextArea();
-        allTa.setSize(getProperSize(300,300));
         allTa.setEditable(false);
         allTa.setBackground(Color.white);
 
-        Button b = new Button("Participantes");
-        
         // Implementações de Action Lisners
         
         // Implementação de KeyListner para enviar mensagens quando a tecla
@@ -113,7 +112,7 @@ public class AWTChatGui extends Frame implements ChatGui {
             }
         });
         // Implementação do botão Send
-        b.addActionListener(new ActionListener() {
+        b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 sendMessage();
             }
@@ -137,12 +136,10 @@ public class AWTChatGui extends Frame implements ChatGui {
         frame.add(jScrollPane,BorderLayout.EAST);
         p.add(writeTf, BorderLayout.CENTER);
         p.add(b2, BorderLayout.EAST);
-        add(frame, BorderLayout.BEFORE_FIRST_LINE);
+        add(frame, BorderLayout.WEST);
         add(p, BorderLayout.SOUTH);
 
         setVisible(true);
-        sendMessage();
-
     }
 
     void refresh(ArrayList<AID> ss) {
