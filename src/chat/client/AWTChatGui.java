@@ -24,6 +24,7 @@ import chat.client.Start.NickNameDlg;
 import chat.client.agent.ChatClientAgent;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.MicroRuntime;
 
 import javax.swing.*;
 import java.awt.*;
@@ -123,9 +124,11 @@ public class AWTChatGui extends Frame implements ChatGui {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 myAgent.handleSpoken(myAgent.getLocalName() + " Saiu do grupo");
-                myAgent.doDelete();
-                NickNameDlg dlg = new NickNameDlg("Chat");
-                setVisible(false);
+
+
+
+                
+                dispose();
             }
         });
         
@@ -181,10 +184,4 @@ public class AWTChatGui extends Frame implements ChatGui {
         int y = (screenSize.height < maxY ? screenSize.height : maxY);
         return new Dimension(x, y);
     }
-
-    public void dispose() {
-        participantsFrame.dispose();
-        super.dispose();
-    }
-
 }

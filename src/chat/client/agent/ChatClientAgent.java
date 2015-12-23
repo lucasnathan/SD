@@ -159,7 +159,7 @@ public class ChatClientAgent extends Agent {
         public void onStart() {
             // Subscribe as a chat participant to the ChatManager agent
 
-
+            notifyParticipantsChanged();
             ACLMessage subscription = new ACLMessage(ACLMessage.SUBSCRIBE);
             subscription.setLanguage(codec.getName());
             subscription.setOntology(onto.getName());
@@ -177,7 +177,7 @@ public class ChatClientAgent extends Agent {
         public void action() {
             // Receives information about people joining and leaving
             // the chat from the ChatManager agent
-
+            notifyParticipantsChanged();
             ACLMessage msg = myAgent.receive(template);
             if (msg != null) {
                 if (msg.getPerformative() == ACLMessage.INFORM) {
@@ -211,6 +211,7 @@ public class ChatClientAgent extends Agent {
                             AbsAggregate agg = (AbsAggregate) p
                                     .getAbsTerm(ChatOntology.JOINED_WHO);
                             if (agg != null) {
+                                notifyParticipantsChanged();
                                 Iterator it = agg.iterator();
                                 while (it.hasNext()) {
                                     AbsConcept c = (AbsConcept) it.next();
@@ -218,8 +219,8 @@ public class ChatClientAgent extends Agent {
                                             .getInstance().toObject(c));
                                 }
                             }
-
                             notifyParticipantsChanged();
+
                         }
                     } catch (Exception e) {
                         Logger.println(e.toString());
@@ -231,7 +232,9 @@ public class ChatClientAgent extends Agent {
             } else {
                 block();
             }
+            notifyParticipantsChanged();
         }
+
     } // END of inner class ParticipantsManager
 
     /**
