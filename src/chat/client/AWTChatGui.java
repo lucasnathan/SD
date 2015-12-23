@@ -106,8 +106,8 @@ public class AWTChatGui extends Frame implements ChatGui {
         add(p, BorderLayout.SOUTH);
         add(allTa, BorderLayout.CENTER);
         add(b, BorderLayout.NORTH);
-        
         setVisible(true);
+
     }
 
     public void sendMessage() {
@@ -126,7 +126,9 @@ public class AWTChatGui extends Frame implements ChatGui {
     }
 
     public void notifyParticipantsJoined(Agent name) {
+
         myAgent.handleSpoken(name.getLocalName()+" entrou no grupo");
+
     }
     public void notifySpoken(String speaker, String sentence) {
         allTa.append(speaker + ": " + sentence + "\n");

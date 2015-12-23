@@ -95,6 +95,7 @@ public class ChatClientAgent extends Agent {
         /*#MIDP_INCLUDE_BEGIN
          myGui = new MIDPChatGui(this);
          #MIDP_INCLUDE_END*/
+
     }
 
     protected void takeDown() {
@@ -135,7 +136,7 @@ public class ChatClientAgent extends Agent {
     // ///////////////////////////////////////
     private void handleUnexpected(ACLMessage msg) {
         if (logger.isLoggable(Logger.WARNING)) {
-            logger.log(Logger.WARNING, "Mensagem nao esperaca recebida de "
+            logger.log(Logger.WARNING, "Mensagem nao esperada recebida de "
                     + msg.getSender().getName());
             logger.log(Logger.WARNING, "O Conteudo e: " + msg.getContent());
         }
@@ -157,6 +158,8 @@ public class ChatClientAgent extends Agent {
 
         public void onStart() {
             // Subscribe as a chat participant to the ChatManager agent
+
+
             ACLMessage subscription = new ACLMessage(ACLMessage.SUBSCRIBE);
             subscription.setLanguage(codec.getName());
             subscription.setOntology(onto.getName());
@@ -168,11 +171,13 @@ public class ChatClientAgent extends Agent {
             // Initialize the template used to receive notifications
             // from the ChatManagerAgent
             template = MessageTemplate.MatchConversationId(convId);
+
         }
 
         public void action() {
             // Receives information about people joining and leaving
             // the chat from the ChatManager agent
+
             ACLMessage msg = myAgent.receive(template);
             if (msg != null) {
                 if (msg.getPerformative() == ACLMessage.INFORM) {
@@ -187,7 +192,7 @@ public class ChatClientAgent extends Agent {
                             AbsAggregate agg = (AbsAggregate) p
                                     .getAbsTerm(ChatOntology.JOINED_WHO);
                             if (agg != null) {
-                                myGui.notifyParticipantsJoined(myAgent);
+                                //myGui.notifyParticipantsJoined(myAgent);
                                 Iterator it = agg.iterator();
                                 while (it.hasNext()) {
                                     AbsConcept c = (AbsConcept) it.next();
@@ -269,6 +274,7 @@ public class ChatClientAgent extends Agent {
         private ChatSpeaker(Agent a, String s) {
             super(a);
             sentence = s;
+
         }
 
         public void action() {
