@@ -48,7 +48,31 @@ public class AWTChatGui extends Frame implements ChatGui {
         Panel p = new Panel();
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
+        
 
+
+        Button b = new Button("Enviar");
+
+        
+        
+        
+
+        allTa = new TextArea();
+        allTa.setEditable(false);
+        allTa.setBackground(Color.white);
+        
+
+        b = new Button("Participantes");
+       
+        
+
+        participantsFrame = new ParticipantsFrame(this, myAgent);
+        
+        
+        // Implementações de Action Lisners
+        
+        // Implementação de KeyListner para enviar mensagens quando a tecla
+        // enter for pressionada
         writeTf.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -58,27 +82,13 @@ public class AWTChatGui extends Frame implements ChatGui {
                 }
             }
         });
-
-
-        Button b = new Button("Enviar");
-
+        // Implementação do botão Send
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 sendMessage();
             }
         });
-        
-        p.add(writeTf, BorderLayout.CENTER);
-        p.add(b, BorderLayout.EAST);
-        
-        add(p, BorderLayout.SOUTH);
-
-        allTa = new TextArea();
-        allTa.setEditable(false);
-        allTa.setBackground(Color.white);
-        add(allTa, BorderLayout.CENTER);
-
-        b = new Button("Participantes");
+        // Implementação do botão para ver Participantes do chat
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!participantsFrame.isVisible()) {
@@ -86,10 +96,9 @@ public class AWTChatGui extends Frame implements ChatGui {
                 }
             }
         });
-        add(b, BorderLayout.NORTH);
-
-        participantsFrame = new ParticipantsFrame(this, myAgent);
-
+        
+        // Implementação do WindowListner para enviar mensagem quando usuario
+        // desconecta do servidor
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 myAgent.handleSpoken(myAgent.getLocalName() + " Saiu do grupo");
@@ -97,7 +106,15 @@ public class AWTChatGui extends Frame implements ChatGui {
                 NickNameDlg dlg = new NickNameDlg("Chat");
             }
         });
-
+        
+        
+        //Adiciona elementos de interface
+        p.add(writeTf, BorderLayout.CENTER);
+        p.add(b, BorderLayout.EAST);
+        add(p, BorderLayout.SOUTH);
+        add(allTa, BorderLayout.CENTER);
+        add(b, BorderLayout.NORTH);
+        
         setVisible(true);
     }
 
