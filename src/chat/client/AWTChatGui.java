@@ -50,14 +50,13 @@ public class AWTChatGui extends Frame implements ChatGui {
         Panel p = new Panel();
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
-        
-        Button b = new Button("Enviar");
-
+        writeTf.setText(myAgent.getLocalName()+"Entrou no grupo");
+        Button b2 = new Button("Enviar");
         allTa = new TextArea();
         allTa.setEditable(false);
         allTa.setBackground(Color.white);
-        
-        b = new Button("Participantes");
+
+        Button b = new Button("Participantes");
        
         participantsFrame = new ParticipantsFrame(this, myAgent);
         
@@ -102,12 +101,16 @@ public class AWTChatGui extends Frame implements ChatGui {
         
         //Adiciona elementos de interface
         p.add(writeTf, BorderLayout.CENTER);
-        p.add(b, BorderLayout.EAST);
+        p.add(b2, BorderLayout.EAST);
         add(p, BorderLayout.SOUTH);
         add(allTa, BorderLayout.CENTER);
         add(b, BorderLayout.NORTH);
         setVisible(true);
+<<<<<<< HEAD
 
+=======
+        sendMessage();
+>>>>>>> 385754b2e976fe3b29e5d5abc970bd380e436d79
     }
 
     public void sendMessage() {

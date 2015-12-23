@@ -5,7 +5,7 @@ out/
 SD.iml
 build.xml
 META-INF/
-
+/dist
 
 #ant specific
 */dist/

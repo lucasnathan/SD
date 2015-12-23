@@ -192,7 +192,10 @@ public class ChatClientAgent extends Agent {
                             AbsAggregate agg = (AbsAggregate) p
                                     .getAbsTerm(ChatOntology.JOINED_WHO);
                             if (agg != null) {
+<<<<<<< HEAD
                                 //myGui.notifyParticipantsJoined(myAgent);
+=======
+>>>>>>> 385754b2e976fe3b29e5d5abc970bd380e436d79
                                 Iterator it = agg.iterator();
                                 while (it.hasNext()) {
                                     AbsConcept c = (AbsConcept) it.next();
