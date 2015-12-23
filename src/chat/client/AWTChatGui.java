@@ -43,31 +43,22 @@ public class AWTChatGui extends Frame implements ChatGui {
     public AWTChatGui(ChatClientAgent a) {
         myAgent = a;
 
+        
         setTitle("Chat: " + myAgent.getLocalName());
         setSize(getProperSize(500, 700));
         Panel p = new Panel();
         p.setLayout(new BorderLayout());
         writeTf = new TextField();
         
-
-
         Button b = new Button("Enviar");
-
-        
-        
-        
 
         allTa = new TextArea();
         allTa.setEditable(false);
         allTa.setBackground(Color.white);
         
-
         b = new Button("Participantes");
        
-        
-
         participantsFrame = new ParticipantsFrame(this, myAgent);
-        
         
         // Implementações de Action Lisners
         
