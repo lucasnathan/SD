@@ -23,6 +23,7 @@ package chat.client;
 import chat.client.Start.NickNameDlg;
 import chat.client.agent.ChatClientAgent;
 import jade.core.AID;
+import jade.core.Agent;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -121,8 +122,12 @@ public class AWTChatGui extends Frame implements ChatGui {
         if (participantsFrame != null) {
             participantsFrame.refresh(names);
         }
+        //myAgent.handleSpoken(names.get(names.size()-1).getLocalName()+" Has joined the Group");
     }
 
+    public void notifyParticipantsJoined(Agent name) {
+        myAgent.handleSpoken(name.getLocalName()+" entrou no grupo");
+    }
     public void notifySpoken(String speaker, String sentence) {
         allTa.append(speaker + ": " + sentence + "\n");
     }

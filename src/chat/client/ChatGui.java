@@ -24,10 +24,13 @@ Boston, MA  02111-1307, USA.
 package chat.client;
 
 import jade.core.AID;
+import jade.core.Agent;
+
 import java.util.ArrayList;
 
 
 public interface ChatGui {
+    void notifyParticipantsJoined(Agent name);
 	void notifyParticipantsChanged(ArrayList<AID> names);
 	void notifySpoken(String speaker, String sentence);
 	void dispose();

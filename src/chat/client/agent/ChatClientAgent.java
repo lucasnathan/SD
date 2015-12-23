@@ -119,7 +119,6 @@ public class ChatClientAgent extends Agent {
         // the spoken sentence
         addBehaviour(new ChatSpeaker(this, s));
     }
-
     public ArrayList<AID> getParticipants() {
         ArrayList<AID> pp = new ArrayList<>();
         Iterator it = participants.iterator();
@@ -183,14 +182,18 @@ public class ChatClientAgent extends Agent {
                         if (p.getTypeName().equals(ChatOntology.JOINED)) {
                             // Get new participants, add them to the list of
                             // participants and notify the gui
+
+
                             AbsAggregate agg = (AbsAggregate) p
                                     .getAbsTerm(ChatOntology.JOINED_WHO);
                             if (agg != null) {
+                                myGui.notifyParticipantsJoined(myAgent);
                                 Iterator it = agg.iterator();
                                 while (it.hasNext()) {
                                     AbsConcept c = (AbsConcept) it.next();
                                     participants.add(BasicOntology
                                             .getInstance().toObject(c));
+
                                 }
                             }
                             notifyParticipantsChanged();
@@ -208,6 +211,7 @@ public class ChatClientAgent extends Agent {
                                             .getInstance().toObject(c));
                                 }
                             }
+
                             notifyParticipantsChanged();
                         }
                     } catch (Exception e) {

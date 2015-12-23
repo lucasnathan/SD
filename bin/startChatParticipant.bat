@@ -1,2 +1,2 @@
-java -cp ..\lib\jade.jar;..\lib\SD.jar chat.client.Start -exitwhenempty true
+java -cp ..\lib\jade.jar;..\dist\Agentes_Moveis_Chat.jar chat.client.Start -exitwhenempty true
 pause
