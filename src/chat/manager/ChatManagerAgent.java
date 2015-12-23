@@ -103,6 +103,14 @@ public class ChatManagerAgent extends Agent implements SubscriptionManager {
             }
         };
         addBehaviour(myAMSSubscriber);
+     
+        // Thread de pooling para verificação de possiveis desconexões
+        new Thread(){
+        public void run(){
+          System.out.println("Thread: " + getName() + " running");
+        }
+      }.start();   
+    
     }
 
     protected void takeDown() {
